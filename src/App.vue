@@ -2,9 +2,11 @@
   <h1>상영 영화</h1>
 
   <div v-for="(list, id) in movieList" :key="id" class="item">
+    <!-- v-for는 :key=""를 지정해줘야 한다 -->
    
     <figure>
       <img :src="`${list.url}`" :alt="list.title" width="200">
+      <!-- html 태그 속성에 동적자료를 연결할려면 :('v-bind:')를 사용한다. -->
        <!-- `${}` :백틱 문법이라고 하는데 ``안에 문자와 변수를 같이 작성하는것이 가능하다. -->
     </figure>
 
@@ -30,7 +32,7 @@
           year:'2024',
           category:'액션, 드라마',
           fontColor:'color:red',
-          count:0,
+          count:0,   //각각의 좋아요버튼의 숫자를 증가시키이 위한 자료형
           url:'./img/노량.jpg',
          },
          {
@@ -46,7 +48,9 @@
     },  //data()
     methods:{
       increase(id){
-         this.movieList[id].count++
+         this.movieList[id].count++   //movieList[]배열 안에 담긴 객체의 count를 증가시킨다.
+        //  옵션 API를 사용하여 옵션의 data, methods 및 mounted 같은 객체를 사용하여 컴포넌트의 로직를 정의합니다. 
+        // 옵션으로 정의된 속성은 컴포넌트 인스턴스를 가리키는 함수 내부의 this에 노출됩니다
       }
     }  //methods:
   }
