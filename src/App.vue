@@ -23,7 +23,7 @@
 
   <!-- 아래는 Modal창 정의 -->
   <div class="modal" v-if="isModal">   
-    <div class="inner">
+    <div class="inner" @click="isModal=fale">
       <h3>Detail</h3>
       <p>영화 상세정보</p>
       <button @click="isModal=fale">닫기</button>
