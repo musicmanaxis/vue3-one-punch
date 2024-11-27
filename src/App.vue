@@ -13,7 +13,7 @@
       <h3 class="bg-color" :style="list.fontColor">제목:{{ list.title }}</h3>
       <p>연도:{{ list.year }}</p>
       <p>장르:{{ list.category }}</p> 
-      <button @click="increase(id)">좋아요</button> 
+      <button @click="increase(index)">좋아요</button> 
       <span>{{ list.count }}</span>
       <p>
         <button @click="isModal=true; selectedMovie=index" >상세보기</button>
@@ -50,8 +50,8 @@
       }
     },  //data()
     methods:{
-      increase(id){
-         this.movieList[id].count++   //movieList[]배열 안에 담긴 객체의 count를 증가시킨다.
+      increase(index){
+         this.movieList[index].count++   //movieList[]배열 안에 담긴 객체의 count를 증가시킨다.
         //  옵션 API를 사용하여 옵션의 data, methods 및 mounted 같은 객체를 사용하여 컴포넌트의 로직를 정의합니다. 
         // 옵션으로 정의된 속성은 컴포넌트 인스턴스를 가리키는 함수 내부의 this에 노출됩니다
       }
