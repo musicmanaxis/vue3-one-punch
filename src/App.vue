@@ -21,13 +21,14 @@
     </div>
   </div>
 
-<div class="modal" v-if="isModal">
-      <div class="inner">
-        <h3>Detail</h3>
-        <p>영화 상세정보</p>
-        <button @click="isModal=fale">닫기</button>
-      </div>
+  <!-- 아래는 Modal창 정의 -->
+  <div class="modal" v-if="isModal">   
+    <div class="inner">
+      <h3>Detail</h3>
+      <p>영화 상세정보</p>
+      <button @click="isModal=fale">닫기</button>
     </div>
+   </div>
     
 </template>
 
@@ -116,8 +117,8 @@
   width: 100%;
  }
 
- .modal{
-  background: rgba(0, 0, 0, 0.07);
+ .modal {
+  background: rgba(0, 0, 0, 0.7);
   position: fixed;
   left: 0;
   top: 0;
