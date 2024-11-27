@@ -3,7 +3,6 @@
 
   <div v-for="(list, id) in movieList" :key="id" class="item">
     <!-- v-for는 :key=""를 지정해줘야 한다 -->
-   
     <figure>
       <img :src="`${list.url}`" :alt="list.title" width="200">
       <!-- html 태그 속성에 동적자료를 연결할려면 :('v-bind:')를 사용한다. -->
@@ -14,19 +13,30 @@
       <h3 class="bg-color" :style="list.fontColor">제목:{{ list.title }}</h3>
       <p>연도:{{ list.year }}</p>
       <p>장르:{{ list.category }}</p> 
-      <button @click="increase(id)">좋아요</button> <span>{{ list.count }}</span>
+      <button @click="increase(id)">좋아요</button> 
+      <span>{{ list.count }}</span>
+      <p>
+        <button @click="isModal=true">상세보기</button>
+      </p>
     </div>
+  </div>
 
+<div class="modal" v-if="isModal">
+      <div class="inner">
+        <h3>Detail</h3>
+        <p>영화 상세정보</p>
+        <button @click="isModal=fale">닫기</button>
+      </div>
+    </div>
     
-    
-</div>
 </template>
 
 <script>
- 
   export default{
+    name:'App',
     data(){
       return{
+        isModal:false,    //modal창이 참이면 보이고 거짓이면 안보이게 하는것
          movieList:[{
           title:'노량',
           year:'2024',
@@ -80,6 +90,11 @@
   margin-bottom: 0.5rem;
  }
 
+ button{
+  margin-right: 10px;
+  margin-top: 1rem;
+ }
+
  .item{
   width: 100%;
   border:1px solid blue;
@@ -99,5 +114,24 @@
 
  .item .info{
   width: 100%;
+ }
+
+ .modal{
+  background: rgba(0, 0, 0, 0.07);
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ }
+
+ .modal .inner{
+  background: #fff;
+  width: 80%;
+  padding: 20px;
+  border-radius: 10px;
  }
 </style>
