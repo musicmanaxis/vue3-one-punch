@@ -1,7 +1,7 @@
 <template>
   <h1>상영 영화</h1>
 
-  <div v-for="(list, id) in movieList" :key="id" class="item">
+  <div v-for="(list, index) in movieList" :key="index" class="item">
     <!-- v-for는 :key=""를 지정해줘야 한다 -->
     <figure>
       <img :src="`${list.url}`" :alt="list.title" width="200">
@@ -16,45 +16,37 @@
       <button @click="increase(id)">좋아요</button> 
       <span>{{ list.count }}</span>
       <p>
-        <button @click="isModal=true">상세보기</button>
+        <button @click="isModal=true; selectedMovie=index" >상세보기</button>
+        <!-- v-for에서 정의한 index를 가져와서 사용 -->
+        <!-- 이벤트가 값을 2가지 이상을 전달할 때 어떻게 하는지 주목 -->
       </p>
     </div>
   </div>
 
   <!-- 아래는 Modal창 정의 -->
   <div class="modal" v-if="isModal">   
-    <div class="inner" @click="isModal=fale">
-      <h3>Detail</h3>
+    <div class="inner" @click="isModal=false">
+      <h3> {{ movieList[selectedMovie].title }} </h3>
+      <!-- <button  selectedMovie=index" >상세보기버튼에서 
+           입력된 index값의 selectedMovie를 가져와서 제목을 보여준다 -->
       <p>영화 상세정보</p>
-      <button @click="isModal=fale">닫기</button>
+      <button @click="isModal=false">닫기</button>
     </div>
    </div>
     
 </template>
 
 <script>
+  import movieList from './assets/movies.js';
+  console.log(movieList)
+
   export default{
     name:'App',
     data(){
       return{
         isModal:false,    //modal창이 참이면 보이고 거짓이면 안보이게 하는것
-         movieList:[{
-          title:'노량',
-          year:'2024',
-          category:'액션, 드라마',
-          fontColor:'color:red',
-          count:0,   //각각의 좋아요버튼의 숫자를 증가시키이 위한 자료형
-          url:'./img/노량.jpg',
-         },
-         {
-          title:'아쿠아맨',
-          year:'2022',
-          category:'액션, 드라마',
-          fontColor:'color:blue',
-          count:0,
-          url:'./img/아쿠아맨.jpg',
-         },
-        ]
+        movieList:movieList,  //import한것을 이렇게 게시해주어야 template에서 사용가능
+        seletedMovie:0,   //선택된 영화의 상세보기를 만들기 위해 선언, 일단 0으로 초기화
       }
     },  //data()
     methods:{
