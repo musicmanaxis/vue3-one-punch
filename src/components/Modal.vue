@@ -23,8 +23,6 @@
 </template> 
 
 <script>
-  
-
    export default{
      name:"ModalComponent", //컴포넌트 용도로 쓸려면 명명규칙에 따라 Modal한 다음에 Component를 붙여준다. 
      

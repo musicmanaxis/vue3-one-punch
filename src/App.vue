@@ -7,30 +7,10 @@
   <Navbar />
   <Event :text="textEvent" />       <!-- text룰 Event.vue에 넘겨준다 -->
 
-  
-   <h1>상영 영화</h1>
-  <div v-for="(list, index) in movieList" :key="index" class="item">
-    <!-- v-for는 :key=""를 지정해줘야 한다 -->
-    <figure>
-      <img :src="`${list.url}`" :alt="list.title" width="200">
-      <!-- html 태그 속성에 동적자료를 연결할려면 :('v-bind:')를 사용한다. -->
-       <!-- `${}` :백틱 문법이라고 하는데 ``안에 문자와 변수를 같이 작성하는것이 가능하다. -->
-    </figure>
-
-    <div class="info">
-      <h3 class="bg-color" :style="list.fontColor">제목:{{ list.title }}</h3>
-      <p>연도:{{ list.year }}</p>
-      <p>장르:{{ list.category }}</p> 
-      <button @click="increase(index)">좋아요</button> 
-      <span>{{ list.count }}</span>
-      <p>
-        <button @click="isModal=true; selectedMovie=index" >상세보기</button>
-        
-        <!-- v-for에서 정의한 index를 가져와서 사용 -->
-        <!-- *이벤트가 값을 2가지 이상을 전달할 때 어떻게 하는지 주목 -->
-      </p>
-    </div>
-   </div> 
+  <Movies :movieListApp="movieList"   
+          @openModal="isModal=true; selectedMovie=$event"
+          :increaseApp="increase" />   
+          <!-- Movies.vue의 상세보기 버튼에서 $emit('openModal', index)의 index를 $event로 받는다 -->
   
   <Modal :movieListApp="movieList"   
          :isModalApp="isModal" 
@@ -48,6 +28,7 @@
   import movies from './assets/movies.js';   //2-1.데이타가 많다면 별도의 js파일로 따로 저장하여 불러들인다.,
   import Navbar from './components/Navbar.vue'; //* 1-1.불러들인 컴포넌트는 하단에서 등록한다.
   import Event from './components/Event.vue';
+  import Movies from './components/Movies.vue';
   import Modal  from './components/Modal.vue';
 
  
@@ -73,9 +54,10 @@
 
     components:{    //* 1-2 컴포넌트는 이렇게 등록을 한다.
       Navbar:Navbar, 
-      Modal:Modal,  
       Event:Event,
-    }
+      Movies:Movies,
+      Modal:Modal,  
+     }
   }
 
 </script>
