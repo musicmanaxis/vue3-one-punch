@@ -8,7 +8,7 @@
       <p>영화 상세정보</p>
       <button @click="$emit('closeModal')">닫기</button>
        <!-- 자식 컴포넌트(Modal.vue)에서 부모 컴포넌트에게 데이터 변경을 요청할 수 있는 방법이 $emit(임의의 이밴트명) 
-        App.vue의 Modal 태그로 이동
+        App.vue의 Modal 태그로 이동  
        -->
 
       <!-- Modal컴포넌트로 분리전 원 소스--------
