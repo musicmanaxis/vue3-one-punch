@@ -6,9 +6,9 @@
 
 <script>
 export default {
-  name:'EventComponent',
+  name:'EventComponent',  // <Event />태그를 사용하기 위해 이런식으로 등록
   props:{
-    text:String,   //App.vue에서 받아온 것을 등록
+    text:String,   //App.vue에서 받아온 것(<Event :text="textEvent"/>)을 등록
   }   
 }
 </script>

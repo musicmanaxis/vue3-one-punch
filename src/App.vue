@@ -1,8 +1,14 @@
+<!-- 문법:1. < >태그안에는 text=""와 같이 값을 할당한다.   
+         2. {{}}사용은 < > {{}} < >와 같이 태그들 사이의 중간에 사용한다. 
+            태그안 자체 < >는 {{}}를 사용하지 않는다. ex)<div  v-if="isModalApp">의  isModalApp부분
+         3. export 영역안에서는 text:'사랑' 과 같이 값을 할당한다.   -->
+
 <template>
   <Navbar />
-  <Event :text="text"/>
-  <h1>상영 영화</h1>
+  <Event :text="textEvent" />       <!-- text룰 Event.vue에 넘겨준다 -->
 
+  
+   <h1>상영 영화</h1>
   <div v-for="(list, index) in movieList" :key="index" class="item">
     <!-- v-for는 :key=""를 지정해줘야 한다 -->
     <figure>
@@ -24,20 +30,22 @@
         <!-- *이벤트가 값을 2가지 이상을 전달할 때 어떻게 하는지 주목 -->
       </p>
     </div>
-  </div>
+   </div> 
+  
   <Modal :movieListApp="movieList"   
          :isModalApp="isModal" 
          :selectedMovieApp="selectedMovie" 
          @closeModal="isModal=false" />
   <!-- 태그안에 넘겨줄 데이터들을 나열할 때는 ','없이 나열한다. -->
-  <!-- * :movieListApp="movieList" Modal.vue로 데이터를 넘겨줄때 v-bind:를 써서 movieListApp이름으로 넘겨준다...-->
+  <!-- * 2-3. :movieListApp="movieList" Modal.vue로 데이터를 넘겨줄때 v-bind:를 써서 movieListApp이름으로 넘겨준다...-->
+   <!-- movies->movieList->movidListApp으로 전달 -->
   <!-- * @closeModal="isModal=false" Modal.vue에서 "$emit('closeModal')로 작성한 것을 이벤트 형식으로 가져다 쓴다. -->
 
     
 </template>
 
 <script>
-  import movieList from './assets/movies.js';   //데이타가 많다면 별도의 js파일로 따로 저장하여 불러들인다.,
+  import movies from './assets/movies.js';   //2-1.데이타가 많다면 별도의 js파일로 따로 저장하여 불러들인다.,
   import Navbar from './components/Navbar.vue'; //* 1-1.불러들인 컴포넌트는 하단에서 등록한다.
   import Event from './components/Event.vue';
   import Modal  from './components/Modal.vue';
@@ -48,10 +56,10 @@
     name:'App',
     data(){
       return{
-        movieList:movieList,  // * import한것을 이렇게 게시해주어야 template에서 사용가능
+        movieList:movies,  // *  2-2 .movies(객체배열)로 import한 것을 movieList로 매칭시켜 template에서 사용가능
         isModal:false,    //상태전환 변수선언:modal창이 참이면 보이고 거짓이면 안보이게 하는것, 일단은 안보이게
         seletedMovie:0,   //상태변수:선택된 영화의 상세보기를 만들기 위해 선언, 일단 0으로 초기화
-        text:'Netfilx 경성 크리처: 알려지지 않는 비밀!!!'
+        textEvent:'Netfilx 경성 크리처: 알려지지 않는 비밀!!!---'
       }
     },  //data()
 
