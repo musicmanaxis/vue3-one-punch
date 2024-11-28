@@ -19,7 +19,9 @@
   <!-- 태그안에 넘겨줄 데이터들을 나열할 때는 ','없이 나열한다. -->
   <!-- * 2-3. :movieListApp="movieList" Modal.vue로 데이터를 넘겨줄때 v-bind:를 써서 movieListApp이름으로 넘겨준다...-->
    <!-- movies->movieList->movidListApp으로 전달 -->
-  <!-- * @closeModal="isModal=false" Modal.vue에서 "$emit('closeModal')로 작성한 것을 이벤트 형식으로 가져다 쓴다. -->
+  <!-- * @closeModal="isModal=false"는 Modal.vue에서 "$emit('closeModal')로 작성한 것을 이벤트 형식으로 가져다 쓴다. -->
+        <!-- 하위컴포넌트에서(Modal.vue) 상위컴포넌트(App.vue)로 요청받을시   
+            @closeModal(이벤트형식)로 받고 받은 요청을 처리(="isModal=false")해준다.-->
 
     
 </template>
