@@ -1,6 +1,6 @@
 <template >
   <div  class="event">
-    <p>{{text}}</p>
+    <p style="color: red;">{{text}}</p>
   </div>
 </template>
 
