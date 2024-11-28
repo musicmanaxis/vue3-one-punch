@@ -24,7 +24,7 @@
 .navbar a {
     color: #fff;
     text-decoration: none;
-    padding: 1rem;
+    padding: 1em;
 }
 </style>
 

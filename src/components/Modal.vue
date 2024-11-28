@@ -1,21 +1,40 @@
 <template>
   <!-- 아래는 Modal창 정의 -->
-  <div class="modal" v-if="isModal">   
-    <div class="inner" @click="isModal=false">
-      <h3> {{ movieList[selectedMovie].title }} </h3>
+  <div class="modal" v-if="isModalApp">   
+    <div class="inner" @click="$emit('closeModal')">
+      <h3>  {{movieListApp[selectedMovieApp].title}}  </h3>
       <!-- <button  selectedMovie=index" >상세보기버튼에서 
            입력된 index값의 selectedMovie를 가져와서 제목을 보여준다 -->
       <p>영화 상세정보</p>
-      <button @click="isModal=false">닫기</button>
-      <!-- isModal이 App.vue에 있기 때문에 이 변수를 전달 받는다. -->
+      <button @click="$emit('closeModal')">닫기</button>
+       <!-- 자식 컴포넌트(Modal.vue)에서 부모 컴포넌트에게 데이터 변경을 요청할 수 있는 방법이 $emit(임의의 이밴트명) 
+        App.vue의 Modal 태그로 이동
+       -->
+
+      <!-- Modal컴포넌트로 분리전 원 소스--------
+       <button @click="{{isModal}}=false">닫기</button>
+           isModal이 App.vue에 있기 때문에 이 변수를 전달 받는다. -->
+
+     
     </div>
    </div>
-</template>
+</template> 
 
 <script>
-    export default{
-        name:'ModalComponent',
-    }
+ 
+   export default{
+     name:"ModalComponent",
+
+     props:{
+     isModalApp:Boolean,
+     movieListApp:Array ,
+     selectedMovieApp:Number ,
+     //App.vue의 <Modal>태그에서 넘겨준 것을 '변수명:데이터 타입'으로 등록한다.
+    },
+
+   }
+
+  
 </script>
 
 <style>
