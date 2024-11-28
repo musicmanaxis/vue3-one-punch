@@ -1,4 +1,5 @@
 <template>
+  <Navbar />
   <h1>상영 영화</h1>
 
   <div v-for="(list, index) in movieList" :key="index" class="item">
@@ -22,31 +23,24 @@
       </p>
     </div>
   </div>
+  <Modal />
 
-  <!-- 아래는 Modal창 정의 -->
-  <div class="modal" v-if="isModal">   
-    <div class="inner" @click="isModal=false">
-      <h3> {{ movieList[selectedMovie].title }} </h3>
-      <!-- <button  selectedMovie=index" >상세보기버튼에서 
-           입력된 index값의 selectedMovie를 가져와서 제목을 보여준다 -->
-      <p>영화 상세정보</p>
-      <button @click="isModal=false">닫기</button>
-    </div>
-   </div>
     
 </template>
 
 <script>
   import movieList from './assets/movies.js';
-  console.log(movieList)
+  //데이타가 많다면 영화리스트를 별도의 js파일로 따로 저장하여 불러들인다.,
+  import Navbar from './components/Navbar.vue';   //불러들인 컴포넌트는 하단에서 등록한다.
+  import Modal  from './components/Modal.vue';
 
   export default{
     name:'App',
     data(){
       return{
-        isModal:false,    //modal창이 참이면 보이고 거짓이면 안보이게 하는것
+        isModal:false,    //상태전환 변수선언:modal창이 참이면 보이고 거짓이면 안보이게 하는것
         movieList:movieList,  //import한것을 이렇게 게시해주어야 template에서 사용가능
-        seletedMovie:0,   //선택된 영화의 상세보기를 만들기 위해 선언, 일단 0으로 초기화
+        seletedMovie:0,   //상태변수:선택된 영화의 상세보기를 만들기 위해 선언, 일단 0으로 초기화
       }
     },  //data()
     methods:{
@@ -55,7 +49,11 @@
         //  옵션 API를 사용하여 옵션의 data, methods 및 mounted 같은 객체를 사용하여 컴포넌트의 로직를 정의합니다. 
         // 옵션으로 정의된 속성은 컴포넌트 인스턴스를 가리키는 함수 내부의 this에 노출됩니다
       }
-    }  //methods:
+    },  //methods:
+    components:{    //컴포넌트는 이렇게 등록을 한다.
+      Navbar:Navbar, 
+      Modal:Modal,  
+    }
   }
 
 </script>

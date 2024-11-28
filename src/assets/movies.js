@@ -18,4 +18,4 @@ const movieList=[{
 
 
   export default movieList   //대표적인 모듈 하나만 내보낼때만 이런방식
-  //여러개인 경우는 {}를 사용한다.
+  //여러개인 경우는 export {movie, lisy, acter}를 사용한다.
