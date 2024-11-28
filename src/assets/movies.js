@@ -1,7 +1,7 @@
 const movieList=[{
     title:'노량',
     year:'2024',
-    category:'액션, 드라마',
+    category:'역사, 드라마',
     fontColor:'color:red',
     count:0,   //각각의 좋아요버튼의 숫자를 증가시키이 위한 자료형
     url:'./img/노량.jpg',
@@ -9,7 +9,7 @@ const movieList=[{
    {
     title:'아쿠아맨',
     year:'2022',
-    category:'액션, 드라마',
+    category:'액션, 환타지',
     fontColor:'color:blue',
     count:0,
     url:'./img/아쿠아맨.jpg',

@@ -1,6 +1,6 @@
 <template>
   <Navbar />
-  <Event :text="text "/>
+  <Event :text="text"/>
   <h1>상영 영화</h1>
 
   <div v-for="(list, index) in movieList" :key="index" class="item">
@@ -19,6 +19,7 @@
       <span>{{ list.count }}</span>
       <p>
         <button @click="isModal=true; selectedMovie=index" >상세보기</button>
+        
         <!-- v-for에서 정의한 index를 가져와서 사용 -->
         <!-- *이벤트가 값을 2가지 이상을 전달할 때 어떻게 하는지 주목 -->
       </p>
@@ -26,7 +27,7 @@
   </div>
   <Modal :movieListApp="movieList"   
          :isModalApp="isModal" 
-         :selectedMovieApp="seletedMovie" 
+         :selectedMovieApp="selectedMovie" 
          @closeModal="isModal=false" />
   <!-- 태그안에 넘겨줄 데이터들을 나열할 때는 ','없이 나열한다. -->
   <!-- * :movieListApp="movieList" Modal.vue로 데이터를 넘겨줄때 v-bind:를 써서 movieListApp이름으로 넘겨준다...-->
@@ -48,7 +49,7 @@
     data(){
       return{
         movieList:movieList,  // * import한것을 이렇게 게시해주어야 template에서 사용가능
-        isModal:false,    //상태전환 변수선언:modal창이 참이면 보이고 거짓이면 안보이게 하는것
+        isModal:false,    //상태전환 변수선언:modal창이 참이면 보이고 거짓이면 안보이게 하는것, 일단은 안보이게
         seletedMovie:0,   //상태변수:선택된 영화의 상세보기를 만들기 위해 선언, 일단 0으로 초기화
         text:'Netfilx 경성 크리처: 알려지지 않는 비밀!!!'
       }

@@ -14,8 +14,6 @@
       <!-- Modal컴포넌트로 분리전 원 소스--------
        <button @click="{{isModal}}=false">닫기</button>
            isModal이 App.vue에 있기 때문에 이 변수를 전달 받는다. -->
-
-     
     </div>
    </div>
 </template> 
@@ -23,13 +21,15 @@
 <script>
  
    export default{
-     name:"ModalComponent",
+     name:"ModalComponent", //컴포넌트 용도로 쓸려면 명명규칙에 따라 Modal한 다음에 Component를 붙여준다. 
 
-     props:{
+     props:{    
+       //App.vue의 <Modal>태그에서 넘겨준 것을 '변수명:데이터 타입'으로 등록. 
+        //그러면 App.vue에서 정의한 변수들을 인식하고 이 파일에서 <template>에서 쓸수 있다. 
      isModalApp:Boolean,
-     movieListApp:Array ,
-     selectedMovieApp:Number ,
-     //App.vue의 <Modal>태그에서 넘겨준 것을 '변수명:데이터 타입'으로 등록한다.
+     movieListApp:Array,
+     selectedMovieApp:Number,
+     
     },
 
    }
