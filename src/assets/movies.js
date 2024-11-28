@@ -5,6 +5,7 @@ const movieList=[{
     fontColor:'color:red',
     count:0,   //각각의 좋아요버튼의 숫자를 증가시키이 위한 자료형
     url:'./img/노량.jpg',
+    detailInfo:'조선시대 임진왜란의 전쟁을 그린 영화',
    },
    {
     title:'아쿠아맨',
@@ -13,6 +14,7 @@ const movieList=[{
     fontColor:'color:blue',
     count:0,
     url:'./img/아쿠아맨.jpg',
+    detailInfo:'워더브러더스사의 바다에 관한 아쿠아왕자 이야기',
    },
   ]
 
