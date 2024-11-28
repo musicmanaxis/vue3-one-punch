@@ -1,7 +1,11 @@
 <!-- 문법:1. < >태그안에는 text=""와 같이 값을 할당한다.   
          2. {{}}사용은 < > {{}} < >와 같이 태그들 사이의 중간에 사용한다. 
             태그안 자체 < >는 {{}}를 사용하지 않는다. ex)<div  v-if="isModalApp">의  isModalApp부분
-         3. export 영역안에서는 text:'사랑' 과 같이 값을 할당한다.   -->
+         3. export 영역안에서는 text:'사랑' 과 같이 값을 할당한다.  
+         4.상위컴포넌트와 하위컴포넌트의 데이터 전송위치는 컴포넌트 태그 안에서 작성된다
+           <Movies :movieListApp="movieList"  :상위컴포넌트에서 하위컴포넌트로 데이터 전송 
+            @openModal="isModal=true; selectedMovie=$event" />:하위컴포넌트에서 요청받은 것을 처리
+         -->
 
 <template>
   <Navbar />
@@ -22,8 +26,6 @@
   <!-- * @closeModal="isModal=false"는 Modal.vue에서 "$emit('closeModal')로 작성한 것을 이벤트 형식으로 가져다 쓴다. -->
         <!-- 하위컴포넌트에서(Modal.vue) 상위컴포넌트(App.vue)로 요청받을시   
             @closeModal(이벤트형식)로 받고 받은 요청을 처리(="isModal=false")해준다.-->
-
-    
 </template>
 
 <script>
@@ -32,8 +34,6 @@
   import Event from './components/Event.vue';
   import Movies from './components/Movies.vue';
   import Modal  from './components/Modal.vue';
-
- 
 
   export default{
     name:'App',
@@ -61,7 +61,6 @@
       Modal:Modal,  
      }
   }
-
 </script>
 
 <style>
