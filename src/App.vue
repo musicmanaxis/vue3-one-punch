@@ -18,6 +18,7 @@
 <template>
   <Navbar />
   <Event :textApp="textEvent" />       <!-- 'textApp'라는 이름으로 Event.vue에 넘겨준다 -->
+  <SearchBar :movieListApp="movieList" :selectedMovieApp="selectedMovie" />
 
   <Movies :movieListApp="movieList"   
           @openModal="isModal=true; selectedMovie=$event"
@@ -42,7 +43,7 @@
   import Event from './components/Event.vue';
   import Movies from './components/Movies.vue';
   import Modal  from './components/Modal.vue';
-
+  import SearchBar from './components/SearchBar.vue';
   export default{
     name:'App',
     data(){
@@ -50,7 +51,7 @@
         movieList:movies,  // *  2-2 .movies(객체배열)로 import한 것을 movieList로 매칭시켜 template에서 사용가능
         isModal:false,    //상태전환 변수선언:modal창이 참이면 보이고 거짓이면 안보이게 하는것, 일단은 안보이게
         seletedMovie:0,   //상태변수:선택된 영화의 상세보기를 만들기 위해 선언, 일단 0으로 초기화
-        textEvent:'Netfilx 경성 크리처: 알려지지 않는 비밀!!!---'
+        textEvent:'Netfilx 경성 크리처: 알려지지 않는 비밀!!!'
       }
     },  //data()
 
@@ -67,6 +68,7 @@
       Event:Event,
       Movies:Movies,
       Modal:Modal,  
+      SearchBar:SearchBar,
      }
   }
 </script>
