@@ -18,7 +18,7 @@
 <template>
   <Navbar />
   <Event :textApp="textEvent" />       <!-- 'textApp'라는 이름으로 Event.vue에 넘겨준다 -->
-  <SearchBar :movieListApp="movieList" :selectedMovieApp="selectedMovie" />
+  <SearchBar :movieListApp="movieList" />
 
   <Movies :movieListApp="movieList"   
           @openModal="isModal=true; selectedMovie=$event"
