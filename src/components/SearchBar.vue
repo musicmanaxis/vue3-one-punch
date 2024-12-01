@@ -2,8 +2,8 @@
   <div class="search-box">
     <input type="search" placeholder="검색을 입력하세요" 
     @change="inputText=$event.target.value;
-    $event.target.value=''     //  한번 입력을 하고나면 빈칸으로 초기화되게 보이게 한다
-    ">
+    $event.target.value=''     //  한번 입력을 하고나면 빈칸으로 초기화되게 보이게 한다, 이벤트를 2개이상 처리할수 있다.
+    ">  
     <!-- @change:입력내용을 엔터키치거나 확인버튼을 누를 때 처리됨 , $event.target:현재입력을 받고 있는 요소명, value:해당요소의 입력된 값 -->
     <button>검색</button>
   </div>
