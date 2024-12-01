@@ -1,4 +1,4 @@
-<!-- 문법:1. < >태그안에는 text=""와 같이 값을 할당한다.   
+<!--문법:1. < >태그안에는 text=""와 같이 값을 할당한다.   
          2. {{}}사용은 < > {{}} </ >와 같이 태그들 사이의 중간에 사용한다. 
             태그안 자체 < >는 {{}}를 사용하지 않는다. ex)<div  v-if="isModalApp">의  isModalApp부분
          3. export 영역안에서는 text:'사랑' 과 같이 값을 할당한다.  
@@ -17,7 +17,7 @@
          -->
 <template>
   <Navbar />
-  <Event :text="textEvent" />       <!-- text룰 Event.vue에 넘겨준다 -->
+  <Event :textApp="textEvent" />       <!-- 'textApp'라는 이름으로 Event.vue에 넘겨준다 -->
 
   <Movies :movieListApp="movieList"   
           @openModal="isModal=true; selectedMovie=$event"
