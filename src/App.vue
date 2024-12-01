@@ -1,12 +1,20 @@
 <!-- 문법:1. < >태그안에는 text=""와 같이 값을 할당한다.   
-         2. {{}}사용은 < > {{}} < >와 같이 태그들 사이의 중간에 사용한다. 
+         2. {{}}사용은 < > {{}} </ >와 같이 태그들 사이의 중간에 사용한다. 
             태그안 자체 < >는 {{}}를 사용하지 않는다. ex)<div  v-if="isModalApp">의  isModalApp부분
          3. export 영역안에서는 text:'사랑' 과 같이 값을 할당한다.  
          4.상위컴포넌트와 하위컴포넌트의 데이터 전송위치는 컴포넌트 태그 안에서 작성된다
-           <Movies :movieListApp="movieList"  :상위컴포넌트에서 하위컴포넌트로 데이터 전송 
-            @openModal="isModal=true; selectedMovie=$event" />:하위컴포넌트에서 요청받은 것을 처리
-         -->
+           4-1.<Movies :movieListApp="movieList"  :상위컴포넌트에서 하위컴포넌트로 데이터 전송 
 
+           4-2.하위컴포넌트 Movies.vue에서 props:{ movieListApp(받아온 이름):Array(데이터타입) }로 선언하고
+              <template>안에서 사용
+              
+           4-3.하위컴포넌트에서 상위컴포넌트로 데이터를 전송할때는 태그안에 $emit('openModal'를 사용하여 
+              openModal이름으로 상위컴포넌트에서 어떠한 처리를 할것을 요청한다. 
+               <button @click="$emit('openModal', index)">상세보기</button>   
+
+           4-4.상위컴포넌트(App.vue)에서 @openModal="isModal=true; selectedMovie=$event" />:하위컴포넌트에서 요청받은 것을 처리
+               openModal이름으로 요청받은것을 isModal을 true로 바꾸고 index로 넘겨준것을 $event로 받아서 selectMovie에 집어넣는다. 
+         -->
 <template>
   <Navbar />
   <Event :text="textEvent" />       <!-- text룰 Event.vue에 넘겨준다 -->
