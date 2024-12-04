@@ -1,4 +1,5 @@
 const movieList=[{
+    id:0,
     title:'노량',
     year:'2024',
     category:'역사, 드라마',
@@ -8,6 +9,7 @@ const movieList=[{
     detailInfo:'조선시대 임진왜란의 전쟁을 그린 영화',
    },
    {
+    id:1,
     title:'아쿠아맨',
     year:'2022',
     category:'액션, 환타지',

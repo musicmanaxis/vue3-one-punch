@@ -18,17 +18,21 @@
 <template>
   <Navbar />
   <Event :textApp="textEvent" />       <!-- 'textApp'라는 이름으로 Event.vue에 넘겨준다 -->
-  <SearchBar :movieListApp="movieList" />
+  <SearchBar :movieListApp="copyMovieList" @searchMovie="searchMovie($event)"/>
+  <p>
+    <button @click="showMovieList">영화 전체보기</button>
+  </p>
 
-  <Movies :movieListApp="movieList"   
-          @openModal="isModal=true; selectedMovie=$event"
-          :increaseApp="increase" />   
+  <Movies :movieListApp="copyMovieList"   
+          @openModal="isModal=true; selectedMovie=$event;"
+          @increaseLike="increaseLike" 
+          />   
           <!-- Movies.vue의 상세보기 버튼에서 $emit('openModal', index)의 index를 $event로 받는다 -->
   
-  <Modal :movieListApp="movieList"   
+  <Modal :movieListApp="copyMovieList"   
          :isModalApp="isModal" 
          :selectedMovieApp="selectedMovie" 
-         @closeModal="isModal=false" />
+         @closeModal="isModal=false;"  />
   <!-- 태그안에 넘겨줄 데이터들을 나열할 때는 ','없이 나열한다. -->
   <!-- * 2-3. :movieListApp="movieList" Modal.vue로 데이터를 넘겨줄때 v-bind:를 써서 movieListApp이름으로 넘겨준다...-->
    <!-- movies->movieList->movidListApp으로 전달 -->
@@ -48,19 +52,33 @@
     name:'App',
     data(){
       return{
-        movieList:movies,  // *  2-2 .movies(객체배열)로 import한 것을 movieList로 매칭시켜 template에서 사용가능
-        isModal:false,    //상태전환 변수선언:modal창이 참이면 보이고 거짓이면 안보이게 하는것, 일단은 안보이게
-        seletedMovie:0,   //상태변수:선택된 영화의 상세보기를 만들기 위해 선언, 일단 0으로 초기화
-        textEvent:'Netfilx 경성 크리처: 알려지지 않는 비밀!!!'
+        movieList: movies,  // 원본    *2-2 .movies(객체배열)로 import한 것을 movieList로 매칭시켜 template에서 사용가능
+        copyMovieList: [...movies],  //사본    영화배열을 이런식으로  복사한다. '...'이용
+        isModal: false,    //상태전환 변수선언:modal창이 참이면 보이고 거짓이면 안보이게 하는것, 일단은 안보이게
+        seletedMovie: 0,   //상태변수:선택된 영화의 상세보기를 만들기 위해 선언, 일단 0으로 초기화
+        textEvent: 'Netfilx 경성 크리처: 알려지지 않는 비밀!!!'
       }
     },  //data()
 
     methods:{
-      increase(index){   //좋아요 버튼 숫자 늘리기함수
-         this.movieList[index].count++   //movieList[]배열 안에 담긴 객체의 count를 증가시킨다.
+      increaseLike(id){   //좋아요 버튼 숫자 늘리기함수
+         this.copyMovieList.find(movie=>{
+          if(movie.id==id){
+            movie.count+=1;   //movieList[]배열 안에 담긴 객체의 count를 증가시킨다.
+          }
+         })   
         //  옵션 API를 사용하여 옵션의 data, methods 및 mounted 같은 객체를 사용하여 컴포넌트의 로직를 정의합니다. 
         // 옵션으로 정의된 속성은 this를 사용한다.
+      },
+      searchMovie(title){    //영화제목이 포함된 데이터를 가져오는 것
+        this.copyMovieList=this.movieList.filter(
+          movie => {return movie.title.includes(title);
+          })
+      },
+      showMovieList(){
+        this.copyMovieList=[...this.movieList] //배열복사
       }
+
     },  //methods:
 
     components:{    //* 1-2 컴포넌트는 이렇게 등록을 한다.
