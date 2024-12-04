@@ -1,9 +1,8 @@
 <template>
-  <!-- 아래는 Modal창 정의 -->
-  <div class="modal" v-if="isModalApp">   
-    <!-- * 태그자체 안에는 쌍중괄호{{isModalApp }}를 쓰지 않는다. 태그 사이에 쓰는 것이다.-->
-
-    <div class="inner" @click="$emit('closeModal')">
+  <!-- 아래는 Modal창 정의,  isModalApp가 true일때 Modal창이 실행된다.-->
+  <div class="modal" v-if="isModalApp">         
+ 
+    <div class="inner" @click="$emit('closeModal')">     <!-- 모달창 아무곳이나 클릭하면 닫힘 -->
       <h3>  {{movieListApp[selectedMovieApp].title}}  </h3>
       <!-- <button  selectedMovie=index" >상세보기버튼에서 
            입력된 index값의 selectedMovie를 가져와서 제목을 보여준다 -->
