@@ -1,6 +1,7 @@
 <template >
 <div class="container">
   <h1>상영 영화</h1>
+<!-- **App.vue의 <Movies :movieListApp="copyMovieList">를 movieListApp로 넘겨받아 영화자료를 출력한다.-->
   <div v-for="(movie) in movieListApp" :key="movie.id" class="item">  <!-- v-for는 :key=""를 지정해줘야 한다 -->
     <figure>
       <img :src="`${movie.url}`" :alt="movie.title" width="200">
@@ -24,8 +25,8 @@
       </p>
     </div>
    </div> 
-  </div>
 
+  </div>
 </template>
 <script>
 export default {

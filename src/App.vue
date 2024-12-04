@@ -22,8 +22,11 @@
   <p>
     <button @click="showMovieList">영화 전체보기</button>
   </p>
-
-  <Movies :movieListApp="copyMovieList"   
+    
+    
+<!--** :movieListApp="copyMovieList" ->영화자료를 Movies.vue에 넘겨 영화리스트를 화면에 출력하게끔 Movies.vue에서 처리한다. -->
+<!-- Modal의 movieListApp="movieList"와 차이점 파악할 것 --> 
+  <Movies :movieListApp="copyMovieList"     
           @openModal="isModal=true; selectedMovie=$event "
           @increaseLike="increaseLike" 
           />   
