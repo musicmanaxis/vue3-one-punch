@@ -24,12 +24,12 @@
   </p>
 
   <Movies :movieListApp="copyMovieList"   
-          @openModal="isModal=true; selectedMovie=$event;"
+          @openModal="isModal=true; selectedMovie=$event "
           @increaseLike="increaseLike" 
           />   
           <!-- Movies.vue의 상세보기 버튼에서 $emit('openModal', index)의 index를 $event로 받는다 -->
   
-  <Modal :movieListApp="copyMovieList"   
+  <Modal :movieListApp="movieList"   
          :isModalApp="isModal" 
          :selectedMovieApp="selectedMovie" 
          @closeModal="isModal=false;"  />

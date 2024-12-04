@@ -12,14 +12,14 @@
       <h3 class="bg-color" :style="movie.fontColor">제목:{{ movie.title }}</h3>
       <p>연도:{{ movie.year }}</p>
       <p>장르:{{ movie.category }}</p> 
-      <button @click="$emit('increaseLike',movie.id)">좋아요</button> 
+      <button @click="$emit('increaseLike', movie.id)">좋아요</button> 
       <span>{{ movie.count }}</span>
       <p>
         <button @click="$emit('openModal', movie.id)">상세보기</button>
            <!-- 부모컴포넌트에게 1.상세보기를 열게끔하는 이벤트$emit('openModal')와 
-                            2.어떤영화를 보여줄지 index-> $emit('openModal', index) 이렇게 2개의 이벤트를 전달해야 한다.
-                             $emit()은 2번째 인자에 값을 전달할 수 있다 -->
-        <!-- v-for에서 정의한 index를 가져와서 사용 -->
+                            2.어떤영화를 보여줄지 id-> $emit('openModal', id) 이렇게 2개의 이벤트를 전달해야 한다.
+                             $emit()은 2번째 인자를 값으로 전달할 수 있다 -->
+        <!-- v-for에서 정의한 id를 가져와서 사용 -->
         <!-- *이벤트가 값을 2가지 이상을 전달할 때 어떻게 하는지 주목 -->
       </p>
     </div>
