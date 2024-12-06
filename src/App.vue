@@ -17,7 +17,7 @@
          -->
 <template>
   <Navbar />
-  <Event :textApp="textEvent" />       <!-- 'textApp'라는 이름으로 Event.vue에 넘겨준다 -->
+  <Event :textApp="textEvent[textEventTimer]" />       <!-- 일정시간이 지나면 텍스트가 바뀌는 역할-->
   <SearchBar :movieListApp="copyMovieList" @searchMovie="searchMovie($event)"/>
   <p>
     <button @click="showMovieList">영화 전체보기</button>
@@ -55,11 +55,17 @@
     name:'App',
     data(){
       return{
-        movieList: movies,  // 원본    *2-2 .movies(객체배열)로 import한 것을 movieList로 매칭시켜 template에서 사용가능
-        copyMovieList: [...movies],  //사본:UI갱신용으로 사용    배열을 이런식으로  복사한다. '...'이용, 
-        isModal: false,    //상태전환 변수선언:modal창이 참이면 보이고 거짓이면 안보이게 하는것, 일단은 안보이게
-        seletedMovie: 0,   //상태변수:선택된 영화의 상세보기를 만들기 위해 선언, 일단 0으로 초기화
-        textEvent: 'Netfilx 경성 크리처: 알려지지 않는 비밀!!!'
+        movieList: movies,  // 원본영화 데이터    *2-2 .movies(객체배열)로 import한 것을 movieList로 매칭시켜 template에서 사용가능
+        copyMovieList: [...movies],  //사본:UI갱신, 검색 결과 등으로 변형 가능한 복사본으로 사용    배열을 이런식으로  복사한다. '...'이용, 
+        isModal: false,    //모달창 상태를 제어 (열림/닫힘) :modal창이 참이면 보이고 거짓이면 안보이게 하는것, 일단은 안보이게
+        seletedMovie: 0,   //선택된 영화의 인덱스를 저장, 선택된 영화의 상세보기를 만들기 위해 선언
+        textEvent: [
+          'Netfilx 경성 크리처: 알려지지 않는 비밀!!!',
+          '디즈니 100주년 기념작 위시',
+          '그날, 대한민국의 운명이 바뀌었다.',
+        ],
+        textEventTimer:0,   //이벤트 창에 일정시간이 지나면 이벤트 글이 교체 됨 
+        interval:null,  //interval를 해제하기 위해 변수 선언
       }
     },  //data()
 
@@ -73,7 +79,7 @@
         //  옵션 API를 사용하여 옵션의 data, methods 및 mounted 같은 객체를 사용하여 컴포넌트의 로직를 정의합니다. 
         // 옵션으로 정의된 속성은 this를 사용한다.
       },
-      searchMovie(title){    //영화제목이 포함된 데이터를 가져오는 것
+      searchMovie(title){    //영화제목이 포함된 데이터를 원본에서 가져와 필터링을 거쳐 복사본에 넘김
         this.copyMovieList=this.movieList.filter(
           movie => {return movie.title.includes(title);
           })
@@ -90,7 +96,22 @@
       Movies:Movies,
       Modal:Modal,  
       SearchBar:SearchBar,
-     }
+     }, 
+
+     mounted(){
+      this.interval=setInterval(()=>{     //이벤트 창에 일정시간이 지나면 이벤트 글이 교체 됨 
+                      if(this.textEventTimer==this.textEvent.length-1){
+                      this.textEventTimer=0;
+                      }else{ 
+                      this.textEventTimer++;
+                      }
+                    }, 3000);   //interval()함수는 한번 실행되면 종료되지 않고 남아 있는다..이것을 없애주어야 한다. unmounted()에서 처리
+
+     },
+
+     unmounted(){
+       clearInterval(this.interval);  //unmount될 때, 인터벌 해제 
+     },
   }
 </script>
 

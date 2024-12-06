@@ -2,9 +2,9 @@
   <div class="search-box">
     <input type="search" 
     @change="
-    $emit('searchMovie', $event.target.value);   // 2개이상 이벤트 값을 넘길려면 각 값마다 세미콜론(;)을 붙여야 한다.
+    $emit('searchMovie', $event.target.value);   //이벤트 처리시 2개이상 값을 넘길려면 각 값마다 세미콜론(;)을 붙여야 한다.
     inputText=$event.target.value;    //v-model=inputText를 해도 되나 한글자만 입력해도 바로 반응해서 @change사용
-    $event.target.value='';   //  한번 입력을 하고나면 빈칸으로 초기화되게 보이게 한다, 이벤트를 2개이상 처리할수 있다.
+    $event.target.value='';   //  한번 입력을 하고나면 빈칸으로 초기화되게 보이게 한다.
     "   
     placeholder="검색을 입력하세요"  
     >  

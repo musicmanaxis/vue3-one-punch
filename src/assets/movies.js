@@ -18,6 +18,16 @@ const movieList=[{
     url:'./img/아쿠아맨.jpg',
     detailInfo:'워더브러더스사의 바다에 관한 아쿠아왕자 이야기',
    },
+   {
+    id:2,
+    title:'서울의 봄',
+    year:'2021',
+    category:'역사, 사실',
+    fontColor:'color:black',
+    count:0,
+    url:'./img/서울의 봄.jpg',
+    detailInfo:'군사쿠데타를 일으킨 1979 한국 현대사 이야기',
+   },
   ]
 
 
