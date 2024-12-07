@@ -46,6 +46,7 @@
 
 <script>
   import movies from './assets/movies.js';   //2-1.데이타가 많다면 별도의 js파일로 따로 저장하여 불러들인다.,
+  //import axios from 'axios';  %%% MariaDB로 가져오는 방법, 하단 mounted참조
   import Navbar from './components/Navbar.vue'; //* 1-1.불러들인 컴포넌트는 하단에서 등록한다.
   import Event from './components/Event.vue';
   import Movies from './components/Movies.vue';
@@ -106,8 +107,17 @@
                       this.textEventTimer++;
                       }
                     }, 3000);   //interval()함수는 한번 실행되면 종료되지 않고 남아 있는다..이것을 없애주어야 한다. unmounted()에서 처리
+    
+      // axios.get('http://localhost:5000/api/movies')  // %%%  MariaDB로 가져오는 방법
+      // .then(response => {
+      //   this.movieList = response.data;
+      // })
+      // .catch(error => {
+      //   console.error('Error fetching movies:', error);
+      // });
+  },
 
-     },
+     
 
      unmounted(){
        clearInterval(this.interval);  //unmount될 때, 인터벌 해제 
