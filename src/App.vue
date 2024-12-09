@@ -17,7 +17,8 @@
          -->
 <template>
   <Navbar />
-  <Event :textApp="textEvent[textEventTimer]" />       <!-- 일정시간이 지나면 텍스트가 바뀌는 역할-->
+  <Event :textApp="textEvent[textEventTimer]" />
+   <!-- *일정시간이 지나면 텍스트가 바뀌는 기능, mounted()에서 setInterval()이용, ummounted()에서 자원반납-->
   <SearchBar :movieListApp="copyMovieList" @searchMovie="searchMovie($event)"/>
   <p>
     <button @click="showMovieList">영화 전체보기</button>
@@ -52,6 +53,7 @@
   import Movies from './components/Movies.vue';
   import Modal  from './components/Modal.vue';
   import SearchBar from './components/SearchBar.vue';
+  
   export default{
     name:'App',
     data(){
@@ -65,8 +67,8 @@
           '디즈니 100주년 기념작 위시',
           '그날, 대한민국의 운명이 바뀌었다.',
         ],
-        textEventTimer:0,   //이벤트 창에 일정시간이 지나면 이벤트 글이 교체 됨 
-        interval:null,  //interval를 해제하기 위해 변수 선언
+        textEventTimer:0,   //*이벤트 창에 일정시간이 지나면 이벤트 글이 교체 됨 
+        interval:null,  //*interval를 해제(unmounted)하기 위해 변수 선언
       }
     },  //data()
 
@@ -97,32 +99,40 @@
       Movies:Movies,
       Modal:Modal,  
       SearchBar:SearchBar,
-     }, 
+    }, 
 
-     mounted(){
-      this.interval=setInterval(()=>{     //이벤트 창에 일정시간이 지나면 이벤트 글이 교체 됨 
+    mounted(){
+      this.interval=setInterval(()=>{     //*이벤트 창에 일정시간이 지나면 이벤트 글이 교체 됨 
                       if(this.textEventTimer==this.textEvent.length-1){
-                      this.textEventTimer=0;
+                      this.textEventTimer=0;   //배열과 Timer크기가 값다면 0으로 초기화
                       }else{ 
                       this.textEventTimer++;
-                      }
-                    }, 3000);   //interval()함수는 한번 실행되면 종료되지 않고 남아 있는다..이것을 없애주어야 한다. unmounted()에서 처리
-    
-      // axios.get('http://localhost:5000/api/movies')  // %%%  MariaDB로 가져오는 방법
+                      }  
+                        }, 3000);
+
+     //this.interval로 받는 것이 없어도 동작은 함                    
+     //그러나, this.interval에 타이머id가 저장되는데 값을 할당하지 않으면, 타이머를 제어할 수 없게 되기 때문에 
+     //(예: 컴포넌트가 종료될 때 clearInterval()을 사용하여 타이머를 중지할 수 없게 됩니다) 타이머 ID를 저장하는 것이 중요합니다.    
+  
+     //////////////////////////////////////////////////////////////////////////////////////////////////
+     // axios.get('http://localhost:5000/api/movies')  // %%%  MariaDB로 가져오는 방법
       // .then(response => {
       //   this.movieList = response.data;
       // })
       // .catch(error => {
       //   console.error('Error fetching movies:', error);
       // });
-  },
 
-     
 
+    },
+  
      unmounted(){
-       clearInterval(this.interval);  //unmount될 때, 인터벌 해제 
-     },
-  }
+       clearInterval(this.interval);  
+      }  
+    //setInterval은 명시적으로 clearInterval을 호출하기 전까지 계속 실행되므로, 
+    //불필요한 리소스 소모와 메모리 누수를 방지하려면 컴포넌트가 제거될 때 타이머아이디가 들어있는 interval를 이용하여 this.interval을 해제해야 합니다:
+       
+}//export
 </script>
 
 <style>

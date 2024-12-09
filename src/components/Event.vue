@@ -1,9 +1,10 @@
 <template >
   <div  :class="{show:isOpen}" class="event"  >   
-     <!--{show:isOpen} json형태의 객체로 클래스를 동적으로 정의 isOpen이 true이면 show 클래스가 추가됩니다.-->
-    <!-- *1-1클래스를 동적으로 추가하거나 삭제하는 방법: show는 클래스명이고 우측은 조건이다..true는 보이게->이벤트 글씨를 안보이게 한다.-->
-     <!-- {}안에 '클래스명:Boolean' 값으로 스타일 적용여부를 설정할수 있다. -->
-    <p style="color: red;">{{textApp}}</p>
+    <!-- *1-1.div태그안에 클래스들은 가시효과 가부를 정하는 역할. style에서 클래스를 적용하여, 보이고 안보이고를 할수있음. 
+              클래스를 동적으로 추가, 삭제하는 방법: show는 클래스명이고 우측은 값. true는 이벤트 글씨를 보이게 한다.-->
+    <!--  {show:isOpen}-> json형태의 객체로, 클래스를 동적으로 정의. isOpen이 true이면 show 클래스가 적용.-->
+    
+    <p style="color: red;">{{textApp}}</p> <!--textApp: 글내용만 있음 -->
     <button @click="isOpen=false">닫기</button>
   </div>
 </template>
