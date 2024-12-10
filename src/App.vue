@@ -29,9 +29,9 @@
   <Movies :movieListApp="copyMovieList"     
           @openModal="openModal=true; selectedMovie=$event "
           @increaseLikeMovies="increaseLike"   
-          />   <!-- increaseLike($event)대신 increaseLike만 해도 가능,  둘다 가능-->
-          <!-- Movies.vue에서 increaseLikeMovies로 보낸 것을 @increaseLikeMovies이름으로 받음-->
-              <!-- Movies.vue의 상세보기 버튼에서 $emit('openModal', index)의 index를 $event로 받는다 -->
+          /><!-- increaseLike($event)대신 increaseLike만 해도 vue가 자동으로 인자 넘김,  둘다 가능-->
+            <!-- Movies.vue에서 increaseLikeMovies로 보낸 것을 @increaseLikeMovies이름으로 받음-->
+            <!-- Movies.vue의 상세보기 버튼에서 $emit('openModal', index)의 index를 $event로 받는다 -->
   
   <Modal :movieListApp="movieList"   
          :openModalApp="openModal" 
@@ -39,10 +39,9 @@
          @closeModal="openModal=false;"  />
   <!-- 태그안에 넘겨줄 데이터들을 나열할 때는 ','없이 나열한다. -->
   <!-- * 2-3. :movieListApp="movieList" Modal.vue로 데이터를 넘겨줄때 v-bind:를 써서 movieListApp이름으로 넘겨준다...-->
-   <!-- movies->movieList->movidListApp으로 전달 -->
+  <!-- movies->movieList->movidListApp으로 전달 -->
   <!-- * @closeModal="isModal=false"는 Modal.vue에서 "$emit('closeModal')로 작성한 것을 이벤트 형식으로 가져다 쓴다. -->
-        <!-- 하위컴포넌트에서(Modal.vue) 상위컴포넌트(App.vue)로 요청받을시   
-            @closeModal(이벤트형식)로 받고 받은 요청을 처리(="isModal=false")해준다.-->
+  <!-- 하위컴포넌트(Modal.vue)부터 상위컴포넌트(App.vue)에서 요청받을시 @closeModal(이벤트형식)로 받고 받은 요청을 처리(="isModal=false")해준다.-->
 </template>
 
 <script>
