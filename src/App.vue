@@ -28,25 +28,26 @@
 <!--** :movieListApp="copyMovieList" ->영화자료를 Movies.vue에 넘겨 영화리스트를 화면에 출력하게끔 Movies.vue에서 처리한다. -->
 <!-- Modal의 movieListApp="movieList"와 차이점 파악할 것 --> 
   <Movies :movieListApp="copyMovieList"     
-          @openModal="isModal=true; selectedMovie=$event "
-          @increaseLike="increaseLike" 
-          />   
-          <!-- Movies.vue의 상세보기 버튼에서 $emit('openModal', index)의 index를 $event로 받는다 -->
+          @openModal="openModal=true; selectedMovie=$event "
+          @increaseLikeMovies="increaseLike"   
+          /><!-- increaseLike($event)대신 increaseLike만 해도 vue가 자동으로 인자 넘김,  둘다 가능-->
+            <!-- Movies.vue에서 increaseLikeMovies로 보낸 것을 @increaseLikeMovies이름으로 받음-->
+            <!-- Movies.vue의 상세보기 버튼에서 $emit('openModal', index)의 index를 $event로 받는다 -->
   
   <Modal :movieListApp="movieList"   
-         :isModalApp="isModal" 
+         :openModalApp="openModal" 
          :selectedMovieApp="selectedMovie" 
-         @closeModal="isModal=false;"  />
+         @closeModal="openModal=false;"  />
   <!-- 태그안에 넘겨줄 데이터들을 나열할 때는 ','없이 나열한다. -->
   <!-- * 2-3. :movieListApp="movieList" Modal.vue로 데이터를 넘겨줄때 v-bind:를 써서 movieListApp이름으로 넘겨준다...-->
-   <!-- movies->movieList->movidListApp으로 전달 -->
+  <!-- movies->movieList->movidListApp으로 전달 -->
   <!-- * @closeModal="isModal=false"는 Modal.vue에서 "$emit('closeModal')로 작성한 것을 이벤트 형식으로 가져다 쓴다. -->
-        <!-- 하위컴포넌트에서(Modal.vue) 상위컴포넌트(App.vue)로 요청받을시   
-            @closeModal(이벤트형식)로 받고 받은 요청을 처리(="isModal=false")해준다.-->
+  <!-- 하위컴포넌트(Modal.vue)부터 상위컴포넌트(App.vue)에서 요청받을시 @closeModal(이벤트형식)로 받고 받은 요청을 처리(="isModal=false")해준다.-->
 </template>
 
 <script>
   import movies from './assets/movies.js';   //2-1.데이타가 많다면 별도의 js파일로 따로 저장하여 불러들인다.,
+<<<<<<< HEAD
   //import axios from 'axios';  %%% MariaDB로 가져오는 방법, 하단 mounted참조
   import Navbar from './components/Navbar.vue'; //* 1-1.불러들인 컴포넌트는 하단에서 등록한다.
   import Event from './components/Event.vue';
@@ -54,27 +55,42 @@
   import Modal  from './components/Modal.vue';
   import SearchBar from './components/SearchBar.vue';
   
+=======
+//import axios from 'axios';  %%% MariaDB로 가져오는 방법, 하단 mounted참조
+  import NavbarComp from './components/Navbar.vue'; //* 1-1.불러들인 컴포넌트는 하단에서 등록한다.
+  import EventComp from './components/Event.vue';
+  import MoviesComp from './components/Movies.vue';
+  import ModalComp  from './components/Modal.vue';
+  import SearchBarComp from './components/SearchBar.vue';
+
+>>>>>>> 64616747ee6e6657e562e158b48e1bc738075595
   export default{
     name:'App',
     data(){
       return{
         movieList: movies,  // 원본영화 데이터    *2-2 .movies(객체배열)로 import한 것을 movieList로 매칭시켜 template에서 사용가능
         copyMovieList: [...movies],  //사본:UI갱신, 검색 결과 등으로 변형 가능한 복사본으로 사용    배열을 이런식으로  복사한다. '...'이용, 
-        isModal: false,    //모달창 상태를 제어 (열림/닫힘) :modal창이 참이면 보이고 거짓이면 안보이게 하는것, 일단은 안보이게
+        openModal: false,    //모달창 상태를 제어 (열림/닫힘) :modal창이 참이면 보이고 거짓이면 안보이게 하는것, 일단은 안보이게
         seletedMovie: 0,   //선택된 영화의 인덱스를 저장, 선택된 영화의 상세보기를 만들기 위해 선언
         textEvent: [
           'Netfilx 경성 크리처: 알려지지 않는 비밀!!!',
           '디즈니 100주년 기념작 위시',
           '그날, 대한민국의 운명이 바뀌었다.',
         ],
+<<<<<<< HEAD
         textEventTimer:0,   //*이벤트 창에 일정시간이 지나면 이벤트 글이 교체 됨 
         interval:null,  //*interval를 해제(unmounted)하기 위해 변수 선언
+=======
+        textEventTimer:0,   //이벤트 창에 일정시간이 지나면 이벤트 글이 교체 됨 
+        interval:null,  //interval를 해제하기 위해 변수 선언
+       
+>>>>>>> 64616747ee6e6657e562e158b48e1bc738075595
       }
     },  //data()
 
     methods:{
       increaseLike(id){   //좋아요 버튼 숫자 늘리기함수
-         this.copyMovieList.find(movie=>{
+         this.copyMovieList.find(movie=>{  //find():조건에 맞는 첫 번째 요소를 반환, 조건을 만족하는 모든 요소를 찾으려면 filter 메서드를 사용
           if(movie.id==id){
             movie.count+=1;   //movieList[]배열 안에 담긴 객체의 count를 증가시킨다.
           }
@@ -82,10 +98,12 @@
         //  옵션 API를 사용하여 옵션의 data, methods 및 mounted 같은 객체를 사용하여 컴포넌트의 로직를 정의합니다. 
         // 옵션으로 정의된 속성은 this를 사용한다.
       },
-      searchMovie(title){    //영화제목이 포함된 데이터를 원본에서 가져와 필터링을 거쳐 복사본에 넘김
-        this.copyMovieList=this.movieList.filter(
+      searchMovie(title){    
+        //검색하기전에는 전체 영화를 기본으로 보여주다가..검색을 하게 되면(searchMovie 사용) 원본에서 검색된 항목만 가져와서 Movies.vue에 넘긴다.
+         this.copyMovieList=this.movieList.filter(
           movie => {return movie.title.includes(title);
           })
+          
       },
       showMovieList(){
         this.copyMovieList=[...this.movieList] //배열복사
@@ -94,12 +112,21 @@
     },  //methods:
 
     components:{    //* 1-2 컴포넌트는 이렇게 등록을 한다.
+<<<<<<< HEAD
       Navbar:Navbar, 
       Event:Event,
       Movies:Movies,
       Modal:Modal,  
       SearchBar:SearchBar,
     }, 
+=======
+      Navbar:NavbarComp,    // 실제 쓰이는 태그명:import한 자료
+      Event:EventComp,
+      Movies:MoviesComp,
+      Modal:ModalComp,  
+      SearchBar:SearchBarComp,
+     }, 
+>>>>>>> 64616747ee6e6657e562e158b48e1bc738075595
 
     mounted(){
       this.interval=setInterval(()=>{     //*이벤트 창에 일정시간이 지나면 이벤트 글이 교체 됨 

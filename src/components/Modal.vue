@@ -1,6 +1,6 @@
 <template>
   <!-- 아래는 Modal창 정의,  isModalApp가 true일때 Modal창이 실행된다.-->
-  <div class="modal" v-if="isModalApp">         
+  <div class="modal" v-if="openModalApp">         
  
     <div class="inner" @click="$emit('closeModal')">     <!-- 모달창 아무곳이나 클릭하면 닫힘 -->
       <h3>  {{movieListApp[selectedMovieApp].title}}  </h3>
@@ -28,7 +28,7 @@
      props:{    
        //App.vue의 <Modal>태그에서 넘겨준 것을 '변수명:데이터 타입'으로 등록. 
         //그러면 App.vue에서 정의한 변수들을 인식하고 이 파일에서 <template>에서 쓸수 있다. 
-     isModalApp:Boolean,
+     openModalApp:Boolean,
      movieListApp:Array,
      selectedMovieApp:Number,
      

@@ -13,7 +13,7 @@
       <h3 class="bg-color" :style="movie.fontColor">제목:{{ movie.title }}</h3>
       <p>연도:{{ movie.year }}</p>
       <p>장르:{{ movie.category }}</p> 
-      <button @click="$emit('increaseLike', movie.id)">좋아요</button> 
+      <button @click="$emit('increaseLikeMovies', movie.id)">좋아요</button>   <!--increaseLikeMovies라는 이름으로 상위로 보냄-->
       <span>{{ movie.count }}</span>
       <p>
         <button @click="$emit('openModal', movie.id)">상세보기</button>
