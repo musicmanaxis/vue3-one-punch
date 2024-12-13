@@ -47,7 +47,6 @@
 
 <script>
   import movies from './assets/movies.js';   //2-1.데이타가 많다면 별도의 js파일로 따로 저장하여 불러들인다.,
-<<<<<<< HEAD
   //import axios from 'axios';  %%% MariaDB로 가져오는 방법, 하단 mounted참조
   import Navbar from './components/Navbar.vue'; //* 1-1.불러들인 컴포넌트는 하단에서 등록한다.
   import Event from './components/Event.vue';
@@ -55,15 +54,6 @@
   import Modal  from './components/Modal.vue';
   import SearchBar from './components/SearchBar.vue';
   
-=======
-//import axios from 'axios';  %%% MariaDB로 가져오는 방법, 하단 mounted참조
-  import NavbarComp from './components/Navbar.vue'; //* 1-1.불러들인 컴포넌트는 하단에서 등록한다.
-  import EventComp from './components/Event.vue';
-  import MoviesComp from './components/Movies.vue';
-  import ModalComp  from './components/Modal.vue';
-  import SearchBarComp from './components/SearchBar.vue';
-
->>>>>>> 64616747ee6e6657e562e158b48e1bc738075595
   export default{
     name:'App',
     data(){
@@ -77,14 +67,8 @@
           '디즈니 100주년 기념작 위시',
           '그날, 대한민국의 운명이 바뀌었다.',
         ],
-<<<<<<< HEAD
         textEventTimer:0,   //*이벤트 창에 일정시간이 지나면 이벤트 글이 교체 됨 
         interval:null,  //*interval를 해제(unmounted)하기 위해 변수 선언
-=======
-        textEventTimer:0,   //이벤트 창에 일정시간이 지나면 이벤트 글이 교체 됨 
-        interval:null,  //interval를 해제하기 위해 변수 선언
-       
->>>>>>> 64616747ee6e6657e562e158b48e1bc738075595
       }
     },  //data()
 
@@ -112,21 +96,12 @@
     },  //methods:
 
     components:{    //* 1-2 컴포넌트는 이렇게 등록을 한다.
-<<<<<<< HEAD
       Navbar:Navbar, 
       Event:Event,
       Movies:Movies,
       Modal:Modal,  
       SearchBar:SearchBar,
     }, 
-=======
-      Navbar:NavbarComp,    // 실제 쓰이는 태그명:import한 자료
-      Event:EventComp,
-      Movies:MoviesComp,
-      Modal:ModalComp,  
-      SearchBar:SearchBarComp,
-     }, 
->>>>>>> 64616747ee6e6657e562e158b48e1bc738075595
 
     mounted(){
       this.interval=setInterval(()=>{     //*이벤트 창에 일정시간이 지나면 이벤트 글이 교체 됨 
